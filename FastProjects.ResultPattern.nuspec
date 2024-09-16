@@ -3,7 +3,7 @@
     <metadata>
         <id>FastProjects.ResultPattern</id>
         <title>FastProjects.ResultPattern</title>
-        <version>1.0.4</version>
+        <version>1.0.5</version>
         <authors>George Park</authors>
         <description>
             Result pattern implementation with IActionResult mapping for ASP.NET Core.

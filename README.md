@@ -36,6 +36,45 @@ dotnet add package FastProjects.ResultPattern
 
 ---
 
+## 📖 **Usage**
+
+Basic usage example:
+```csharp
+public async Task<Result<User>> GetByIdAsync(Guid id)
+{
+    var user = await _userRepository.GetAsync(id);
+    if (user is null)
+    {
+        return Result.NotFound($"User with {id} not found.");
+    }
+
+    return Result.Success(user);
+}
+```
+
+Translation of the result to IActionResult (example with [FastEndpoints](https://fast-endpoints.com/) usage):
+```csharp
+public override async Task HandleAsync(
+    GetUserByIdRequest request,
+    CancellationToken ct)
+{
+    var command = new GetUserByIdQuery(request.UserId);
+
+    var result = await mediator.Send(command, ct);
+    
+    if (result.IsSuccess)
+    {
+        Response = new GetUserByIdResponse(
+            Id: result.Value.Id,
+            Name: result.Value.Name);
+    }
+    else
+    {
+        await SendResultAsync(result.ToWebResult());
+    }
+}
+```
+
 ## 🤝 **Contributing**
 
 This project is still under development, but contributions are welcome! Whether you’re opening issues, submitting pull requests, or suggesting new features, we appreciate your involvement. For more details, please check the [contribution guide](CONTRIBUTING.md). Let’s build something amazing together! 🎉
