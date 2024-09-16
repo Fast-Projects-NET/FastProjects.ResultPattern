@@ -12,11 +12,12 @@ on:
 
 env:
   DOTNET_VERSION: "8.0.x"
-  NUGET_VERSION: "5.x"
-  NUSPEC_FILE: "./FastProjects.ResultPattern.nuspec"
+  PACKAGE_PATH: "./src/FastProjects.ResultPattern"
+  README_PATH: "./README.md"
+  ICON_LOGO_PATH: "./docs/assets/logo-icon.png"
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,59 +27,20 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+      
+      - name: Copy logo and README files to project directory
+        run: |
+          cp ${{ env.README_PATH }} ${{ env.PACKAGE_PATH }} && \
+          cp ${{ env.ICON_LOGO_PATH }} ${{ env.PACKAGE_PATH }}
 
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore ${{ env.PACKAGE_PATH }}
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build ${{ env.PACKAGE_PATH }} --configuration Release --no-restore
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifacts
-          path: |
-            **/bin/Release/*
-            **/obj/Release/*
-
-  pack:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifacts
-
-      - uses: actions/checkout@v4
-
-      - uses: nuget/setup-nuget@v2
-        with:
-          nuget-version: ${{ env.NUGET_VERSION }}
-
-      - name: Pack the NuGet package with nuspec
-        run: nuget pack ${{ env.NUSPEC_FILE }} -NoDefaultExcludes
-
-      - name: Upload NuGet packages
-        uses: actions/upload-artifact@v4
-        with:
-          name: nuget-packages
-          path: ./*.nupkg
-
-  publish:
-    runs-on: ubuntu-latest
-    needs: pack
-
-    steps:
-      - name: Download NuGet packages
-        uses: actions/download-artifact@v4
-        with:
-          name: nuget-packages
-
-      - uses: nuget/setup-nuget@v2
-        with:
-          nuget-version: ${{ env.NUGET_VERSION }}
-
+      - name: Pack the NuGet package
+        run: dotnet pack ${{ env.PACKAGE_PATH }} --configuration Release --no-restore --output ./nupkg
+      
       - name: Publish to NuGet
-        run: nuget push *.nupkg -src https://api.nuget.org/v3/index.json ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
