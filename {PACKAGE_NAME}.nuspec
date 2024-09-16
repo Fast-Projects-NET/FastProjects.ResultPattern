@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>FastProjects.{PackageName}</id>
+        <title>FastProjects.{PackageName}</title>
+        <version></version>
+        <authors></authors>
+        <description>
+            Test
+        </description>
+        <language>en-US</language>
+        <license type="expression">MIT</license>
+        <projectUrl>https://github.com/Fast-Projects-NET/FastProjects.{PackageName}</projectUrl>
+        <releaseNotes>
+            * Initial Release
+        </releaseNotes>
+        <packageTypes>
+            <packageType name="Dependency" />
+        </packageTypes>
+        <tags>FastProjects</tags>
+        <icon>logo-icon.png</icon>
+        <readme>README.md</readme>
+    </metadata>
+    <files>
+        <file src="README.md" />
+        <file src="docs/assets/logo-icon.png" />
+    </files>
+</package>

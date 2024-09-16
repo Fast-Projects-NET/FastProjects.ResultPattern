@@ -1,0 +1,11 @@
+# Copyright (c) George Park (georgeparkdev)
+
+# Organization admin
+*           @georgeparkdev
+
+# Developers team
+/src/*      @Fast-Projects-NET/developer
+/tests/*    @Fast-Projects-NET/developer
+
+# DevOps team
+.github/*   @Fast-Projects-NET/devops

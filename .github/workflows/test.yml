@@ -1,0 +1,47 @@
+# To configure the workflow:
+# - Replace {SOLUTION_PATH} with the name of the solution file in `env` section
+# - Uncomment the steps in the `build` job
+
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize 
+      - reopened
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  DOTNET_VERSION: "8.0.x"
+  SOLUTION_PATH: "./{SOLUTION_PATH}"
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      # - name: Restore
+      #   run: dotnet restore ${{ env.SOLUTION_PATH }}
+
+      # - name: Build
+      #   run: dotnet build ${{ env.SOLUTION_PATH }} --configuration Release --no-restore
+
+      # - name: Test
+      #   run: dotnet test ${{ env.SOLUTION_PATH }} --configuration Release --no-restore --no-build

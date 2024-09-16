@@ -1,0 +1,83 @@
+# To configure the workflow:
+# - Add a NuGet API key to your repository secrets with the name `NUGET_API_KEY`
+# - Uncomment the steps in the `build`, `pack` and `publish` jobs
+
+name: 🚀 Publish NuGet Package
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  DOTNET_VERSION: "8.0.x"
+  NUSPEC_FILE: "./{NUSPEC_FILE}"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      # - name: Restore
+      #   run: dotnet restore
+
+      # - name: Build
+      #   run: dotnet build --configuration Release --no-restore
+
+      # - name: Upload build artifacts
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: build-artifacts
+      #     path: |
+      #       **/bin/Release/*
+      #       **/obj/Release/*
+
+  pack:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      # - name: Download build artifacts
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: build-artifacts
+
+      - uses: actions/checkout@v4
+
+      - uses: nuget/setup-nuget@v2
+        with:
+          nuget-version: '5.x'
+
+      # - name: Pack the NuGet package with nuspec
+      #   run: nuget pack ${{ env.NUSPEC_FILE }} -NoDefaultExcludes
+
+      # - name: Upload NuGet packages
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: nuget-packages
+      #     path: ./*.nupkg
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: pack
+
+    steps:
+      # - name: Download NuGet packages
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: nuget-packages
+
+      - uses: nuget/setup-nuget@v2
+        with:
+          nuget-version: '5.x'
+
+      # - name: Publish to NuGet
+      #   run: nuget push *.nupkg -src https://api.nuget.org/v3/index.json ${{ secrets.NUGET_API_KEY }}

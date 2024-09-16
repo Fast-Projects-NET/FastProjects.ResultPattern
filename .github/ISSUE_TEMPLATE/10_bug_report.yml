@@ -1,0 +1,42 @@
+name: 🐞 Bug Report
+description: Create a report to help us improve this project.
+title: "[BUG] "
+labels:
+  - bug
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Please describe the bug:**
+        A clear and concise description of what the bug is.
+
+  - type: textarea
+    attributes:
+      label: Steps to Reproduce
+      description: "List the steps to reproduce the behavior, including any commands you ran or actions you took."
+      placeholder: "1. Go to '...'\n2. Click on '...'\n3. See error"
+
+  - type: textarea
+    attributes:
+      label: Expected Behavior
+      description: "Describe what you expected to happen."
+      placeholder: "The expected outcome of the steps to reproduce."
+
+  - type: input
+    attributes:
+      label: Actual Behavior
+      description: "Describe what actually happened after following the steps to reproduce."
+      placeholder: "The actual outcome of the steps to reproduce."
+
+  - type: textarea
+    attributes:
+      label: Additional Information
+      description: "Provide any additional information that might be useful (e.g., logs, screenshots)."
+      placeholder: "Any additional context or details."
+
+  - type: textarea
+    attributes:
+      label: Environment
+      description: "Provide details about your environment (e.g., OS version, Docker version)."
+      placeholder: "Your environment details."

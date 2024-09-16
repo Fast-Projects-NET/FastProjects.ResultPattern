@@ -1,0 +1,29 @@
+name: 📚 Documentation Update
+description: Suggest updates or improvements to the project's documentation.
+title: "[DOCS] "
+labels:
+  - documentation
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Please describe the documentation update:**
+        A clear and concise description of the change or addition you're suggesting.
+  
+  - type: textarea
+    attributes:
+      label: Current Documentation Issue
+      description: "Describe any issues or gaps in the current documentation."
+      placeholder: "Details about what is missing or unclear."
+  
+  - type: textarea
+    attributes:
+      label: Proposed Update
+      description: "Describe what needs to be updated, added, or clarified."
+      placeholder: "Details of the proposed update."
+  
+  - type: textarea
+    attributes:
+      label: Additional Information
+      description: "Include any additional information, links, or examples."
+      placeholder: "Any additional context or details."

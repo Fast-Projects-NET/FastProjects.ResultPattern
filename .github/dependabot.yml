@@ -1,0 +1,16 @@
+# .github/dependabot.yml
+version: 2
+updates:
+  # NuGet dependencies update
+  - package-ecosystem: "nuget"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 10
+
+  # GitHub Actions version update
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    rebase-strategy: "auto"
