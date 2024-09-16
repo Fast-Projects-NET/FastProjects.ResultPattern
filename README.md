@@ -1,23 +1,12 @@
-# To configure the repository template:
+# 🚀 **FastProjects.ResultPattern**
 
-1. Update workflows. If you use CodeQL, rename the `codeql.yml.example` to `codeql.yml`.
-2. Create a solution file and add projects to `.src/` or `.tests/` folders.
-3. Fill the information in `.nuspec` file about nuget package.
-4. Update `README.md` file (also, remove this section).
-
-___
-
-# 🚀 **{NUGET_PACKAGE_NAME}**
-
-![Build Status](https://github.com/Fast-Projects-NET/{REPOSITORY_NAME}/actions/workflows/test.yml/badge.svg)
-![NuGet](https://img.shields.io/nuget/v/{NUGET_PACKAGE_NAME}.svg)
-![NuGet Downloads](https://img.shields.io/nuget/dt/{NUGET_PACKAGE_NAME}.svg)
-![License](https://img.shields.io/github/license/Fast-Projects-NET/{NUGET_PACKAGE_NAME}.svg)
-![Last Commit](https://img.shields.io/github/last-commit/Fast-Projects-NET/{REPOSITORY_NAME}.svg)
-![GitHub Stars](https://img.shields.io/github/stars/Fast-Projects-NET/{REPOSITORY_NAME}.svg)
-![GitHub Forks](https://img.shields.io/github/forks/Fast-Projects-NET/{REPOSITORY_NAME}.svg)
-
-{Short description}
+![Build Status](https://github.com/Fast-Projects-NET/FastProjects.ResultPattern/actions/workflows/test.yml/badge.svg)
+![NuGet](https://img.shields.io/nuget/v/FastProjects.ResultPattern.svg)
+![NuGet Downloads](https://img.shields.io/nuget/dt/FastProjects.ResultPattern.svg)
+![License](https://img.shields.io/github/license/Fast-Projects-NET/FastProjects.ResultPattern.svg)
+![Last Commit](https://img.shields.io/github/last-commit/Fast-Projects-NET/FastProjects.ResultPattern.svg)
+![GitHub Stars](https://img.shields.io/github/stars/Fast-Projects-NET/FastProjects.ResultPattern.svg)
+![GitHub Forks](https://img.shields.io/github/forks/Fast-Projects-NET/FastProjects.ResultPattern.svg)
 
 > 🚨 ALERT: Project Under Development
 > This project is not yet production-ready and is still under active development. Currently, it's being used primarily for personal development needs. However, contributions are more than welcome! If you'd like to collaborate, feel free to submit issues or pull requests. Your input can help shape the future of FastProjects!
@@ -26,14 +15,15 @@ ___
 
 ## 📚 **Overview**
 
-{Overview}
+Result pattern implementation with IActionResult mapping for ASP.NET Core.
 
 ---
 
 ## 🛠 **Roadmap**
 
-- ✅ [{Item1}](#) - {Description} 
-- ⏳ **{Item2}** - {Description}
+- ✅ [Result](src/FastProjects.ResultPattern/Result.cs) - Result pattern implementation
+- ✅ [ResultPatternToActionResultExtensions](src/FastProjects.ResultPattern/ResultPatternToActionResultExtensions.cs) - Extensions for mapping Result to IActionResult
+- ✅ [ResultExtensions](src/FastProjects.ResultPattern/ResultExtensions.cs) - Extensions for Result that checks status codes
 
 ---
 
@@ -41,7 +31,7 @@ ___
 
 You can download the NuGet package using the following command to install:
 ```bash
-dotnet add package {NUGET_PACKAGE_NAME}
+dotnet add package FastProjects.ResultPattern
 ```
 
 ---

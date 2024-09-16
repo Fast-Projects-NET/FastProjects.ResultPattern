@@ -8,7 +8,7 @@ Before contributing, please review the following steps.
 
 ### Reporting Issues
 
-You can start by creating the following types of issues [here](https://github.com/Fast-Projects-NET/{REPOSITORY_NAME}/issues/new/choose):
+You can start by creating the following types of issues [here](https://github.com/Fast-Projects-NET/FastProjects.ResultPattern/issues/new/choose):
 1. **Bug Reports**: Report a bug or unexpected behavior.
 2. **Feature Requests**: Suggest new features or improvements.
 3. **Code Improvements/Documentation Updates**: Propose improvements to the existing code or documentation.
@@ -43,7 +43,7 @@ users/{username}/{topic}/{id}_{title}
 
 ### Best Practices
 
-- Keep your changes simple. Follow the **KISS (Keep It Simple, Stupid)** principle.
+- Keep your changes simple. Follow the **KISS** principle.
 - Use [C# coding best practices](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions) as a reference.
 - Ensure all tests pass before submitting a PR.
 

@@ -12,7 +12,8 @@ on:
 
 env:
   DOTNET_VERSION: "8.0.x"
-  NUSPEC_FILE: "./{NUSPEC_FILE}"
+  NUGET_VERSION: "5.x"
+  NUSPEC_FILE: "./FastProjects.ResultPattern.nuspec"
 
 jobs:
   build:
@@ -26,58 +27,58 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      # - name: Restore
-      #   run: dotnet restore
+      - name: Restore
+        run: dotnet restore
 
-      # - name: Build
-      #   run: dotnet build --configuration Release --no-restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
 
-      # - name: Upload build artifacts
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: build-artifacts
-      #     path: |
-      #       **/bin/Release/*
-      #       **/obj/Release/*
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            **/bin/Release/*
+            **/obj/Release/*
 
   pack:
     runs-on: ubuntu-latest
     needs: build
 
     steps:
-      # - name: Download build artifacts
-      #   uses: actions/download-artifact@v4
-      #   with:
-      #     name: build-artifacts
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
 
       - uses: actions/checkout@v4
 
       - uses: nuget/setup-nuget@v2
         with:
-          nuget-version: '5.x'
+          nuget-version: ${{ env.NUGET_VERSION }}
 
-      # - name: Pack the NuGet package with nuspec
-      #   run: nuget pack ${{ env.NUSPEC_FILE }} -NoDefaultExcludes
+      - name: Pack the NuGet package with nuspec
+        run: nuget pack ${{ env.NUSPEC_FILE }} -NoDefaultExcludes
 
-      # - name: Upload NuGet packages
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: nuget-packages
-      #     path: ./*.nupkg
+      - name: Upload NuGet packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-packages
+          path: ./*.nupkg
 
   publish:
     runs-on: ubuntu-latest
     needs: pack
 
     steps:
-      # - name: Download NuGet packages
-      #   uses: actions/download-artifact@v4
-      #   with:
-      #     name: nuget-packages
+      - name: Download NuGet packages
+        uses: actions/download-artifact@v4
+        with:
+          name: nuget-packages
 
       - uses: nuget/setup-nuget@v2
         with:
-          nuget-version: '5.x'
+          nuget-version: ${{ env.NUGET_VERSION }}
 
-      # - name: Publish to NuGet
-      #   run: nuget push *.nupkg -src https://api.nuget.org/v3/index.json ${{ secrets.NUGET_API_KEY }}
+      - name: Publish to NuGet
+        run: nuget push *.nupkg -src https://api.nuget.org/v3/index.json ${{ secrets.NUGET_API_KEY }}
